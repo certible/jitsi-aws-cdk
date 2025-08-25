@@ -1,0 +1,15 @@
+name: Security
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  call-security:
+    uses: certible/.github/.github/workflows/security.yml@main
+    secrets: inherit
