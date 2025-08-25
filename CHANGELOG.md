@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/certible/jitsi-aws-cdk/compare/v1.0.0...v1.1.0) (2025-08-25)
+
+
+### Features
+
+* :sparkles: push version ([76390d6](https://github.com/certible/jitsi-aws-cdk/commit/76390d6782f5d368f78f02dae521a38190285ab9))
+
 ## 1.0.0 (2025-08-25)
 
 
