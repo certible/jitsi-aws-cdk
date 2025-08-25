@@ -1,6 +1,6 @@
 {
   "name": "@certible/jitsi-aws-cdk",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "TypeScript CDK stack constructs for deploying CloudWatch Widgets for Jitsi Meets.",
   "author": "Certible <oberreiter@certible.com>",
   "license": "Apache-2.0",
