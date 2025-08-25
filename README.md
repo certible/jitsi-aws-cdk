@@ -28,7 +28,7 @@ logging:
 You can integrate the `CloudWatchDashboard` construct into your CDK stack as shown below. The default `logStream` prefix used by various widgets follows the format `<ImageName>_ID-Identifier` (e.g., `jitsi/web_`). You can customize this by passing a different prefix to the `logStreamPrefix` parameter.
 
 ```typescript
-import { JitsiCloudWatchDashboard } from '@jitsi-contrib/jitsi-aws-cdk'
+import { JitsiCloudWatchDashboard } from '@certible/jitsi-aws-cdk'
 
 export class ConferenceStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: cdk.StackProps) {
@@ -46,7 +46,7 @@ export class ConferenceStack extends cdk.Stack {
 Additionally, all widget functions are available as standalone methods in the module. You can use them to add widgets to your own dashboard without instantiating the `JitsiCloudWatchDashboard` construct.
 
 ```typescript
-import { jitsiWidgetsJibri } from '@jitsi-contrib/jitsi-aws-cdk'
+import { jitsiWidgetsJibri } from '@certible/jitsi-aws-cdk'
 import { Dashboard } from 'aws-cdk-lib/aws-cloudwatch'
 
 export class ConferenceStack extends cdk.Stack {
@@ -57,7 +57,3 @@ export class ConferenceStack extends cdk.Stack {
   }
 }
 ```
-
-## Special Thanks
-
-The initial concept was developed by [Certible](https://www.certible.com/), an independent organization that conducts certification exams worldwide.
