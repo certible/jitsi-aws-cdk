@@ -1,5 +1,7 @@
 # Jitsi AWS CDK
 
+> **Note:** This package has been moved to [https://github.com/jitsi-contrib/jitsi-aws-cdk](https://github.com/jitsi-contrib/jitsi-aws-cdk). Please use the new repository for the latest updates and contributions.
+
 A collection of TypeScript CDK stack constructs designed for deploying Jitsi Utilities on AWS.
 
 ## CloudWatch Dashboard
