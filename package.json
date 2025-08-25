@@ -1,15 +1,15 @@
 {
-  "name": "jitsi-aws-cdk",
+  "name": "@certible/jitsi-aws-cdk",
   "version": "1.0.0",
   "description": "TypeScript CDK stack constructs for deploying CloudWatch Widgets for Jitsi Meets.",
-  "author": "jitsi-contrib",
+  "author": "Certible <oberreiter@certible.com>",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jitsi-contrib/jitsi-aws-cdk.git"
+    "url": "git+https://github.com/certible/jitsi-aws-cdk/jitsi-aws-cdk.git"
   },
   "bugs": {
-    "url": "https://github.com/jitsi-contrib/jitsi-aws-cdk/issues"
+    "url": "https://github.com/certible/jitsi-aws-cdk/issues"
   },
   "keywords": [
     "aws",
