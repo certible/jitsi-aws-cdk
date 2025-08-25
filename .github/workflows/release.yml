@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-          scope: '@jitsi'
+          scope: '@certible'
         if: ${{ steps.release.outputs.release_created }}
       - run: npm install
         if: ${{ steps.release.outputs.release_created }}
