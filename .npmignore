@@ -1,6 +1,8 @@
 .LAST_BUILD
 *.ts
 !*.d.ts
+!*.d.mts
+!*.d.cts
 *.tgz
 **/cdk.out
 .LAST_PACKAGE
@@ -8,11 +10,8 @@
 test/
 tsconfig.json
 tsconfig.*.json
-eslint.config.js
+.oxlintrc.json
+.oxfmtrc.json
 .github
 .vscode
 package
-dist/
-!dist/cjs/
-!dist/esm/
-!dist/types/

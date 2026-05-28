@@ -1,3 +1,17 @@
-import { JitsiCloudWatchDashboard, jitsiWidgetsJibri, jitsiWidgetsJicofo, jitsiWidgetsJvb, jitsiWidgetsProsody, jitsiWidgetsWeb } from './modules/cloudwatch-dashboard.js'
+import {
+  JitsiCloudWatchDashboard,
+  jitsiWidgetsJibri,
+  jitsiWidgetsJicofo,
+  jitsiWidgetsJvb,
+  jitsiWidgetsProsody,
+  jitsiWidgetsWeb,
+} from './modules/cloudwatch-dashboard.js';
 
-export { JitsiCloudWatchDashboard, jitsiWidgetsJibri, jitsiWidgetsJicofo, jitsiWidgetsJvb, jitsiWidgetsProsody, jitsiWidgetsWeb }
+export {
+  JitsiCloudWatchDashboard,
+  jitsiWidgetsJibri,
+  jitsiWidgetsJicofo,
+  jitsiWidgetsJvb,
+  jitsiWidgetsProsody,
+  jitsiWidgetsWeb,
+};
