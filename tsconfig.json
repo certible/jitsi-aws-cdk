@@ -1,3 +1,15 @@
 {
-  "extends": "./tsconfig.esm.json"
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "rootDir": "./lib",
+    "strict": true,
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "emitDeclarationOnly": false,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["lib/**/*.ts"]
 }

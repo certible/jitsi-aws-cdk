@@ -18,30 +18,39 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/types/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "scripts": {
     "test": "node ./test/index.test.mjs",
-    "pretest": "npm run build",
-    "build": "rm -rf dist && npm run build:esm && npm run build:cjs && npm run build:types",
-    "build:esm": "tsc -p tsconfig.esm.json",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:types": "tsc -p tsconfig.esm.json --emitDeclarationOnly --outDir dist/types",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "pretest": "pnpm run build",
+    "build": "tsdown",
+    "lint": "oxlint lib test tsdown.config.ts",
+    "lint:fix": "oxlint --fix lib test tsdown.config.ts",
+    "format": "oxfmt --check lib test tsdown.config.ts",
+    "format:fix": "oxfmt --write lib test tsdown.config.ts"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.244.0"
+    "aws-cdk-lib": "^2.244.0",
+    "constructs": "^10.5.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^7.7.3 ",
-    "eslint": "10.1.0",
+    "constructs": "^10.6.0",
+    "oxfmt": "^0.52.0",
+    "oxlint": "^1.67.0",
+    "tsdown": "^0.22.0",
     "typescript": "^5.8.2"
-  }
+  },
+  "packageManager": "pnpm@11.4.0",
+  "type": "module"
 }

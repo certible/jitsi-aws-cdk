@@ -1,19 +1,24 @@
-import type { DashboardProps } from 'aws-cdk-lib/aws-cloudwatch'
-import { Dashboard, LogQueryVisualizationType, LogQueryWidget, TextWidget } from 'aws-cdk-lib/aws-cloudwatch'
-import { Construct } from 'constructs'
+import type { DashboardProps } from 'aws-cdk-lib/aws-cloudwatch';
+import {
+  Dashboard,
+  LogQueryVisualizationType,
+  LogQueryWidget,
+  TextWidget,
+} from 'aws-cdk-lib/aws-cloudwatch';
+import { Construct } from 'constructs';
 
 /**
  * Configuration options for Jitsi component widgets
  */
 export interface JitsiWidgetOptions {
   /** Prefix used to filter log streams */
-  streamPrefix?: string
+  streamPrefix?: string;
   /** Widget base width (defaults to 8) */
-  width?: number
+  width?: number;
   /** Widget base height (defaults to 8) */
-  height?: number
+  height?: number;
   /** Time bin for aggregations (defaults to 15m) */
-  timeBin?: string
+  timeBin?: string;
 }
 
 /**
@@ -22,10 +27,10 @@ export interface JitsiWidgetOptions {
  */
 export class JitsiCloudWatchDashboard extends Construct {
   /** The AWS CloudWatch Dashboard instance */
-  dashboard: Dashboard
+  dashboard: Dashboard;
 
   /** Default log groups to use for widgets */
-  readonly defaultLogGroups?: string[] | string
+  readonly defaultLogGroups?: string[] | string;
 
   /**
    * Creates a new CloudWatch Dashboard for Jitsi monitoring
@@ -38,34 +43,45 @@ export class JitsiCloudWatchDashboard extends Construct {
    * @param options.dashboardProps Props for a new dashboard (optional only relevant if no existing dashboard is used)
    * @param options.defaultLogGroups Default log groups to use for widgets (optional)
    */
-  constructor(scope: Construct, id: string, options: {
-    /** Existing dashboard to use (optional) */
-    dashboard?: Dashboard
-    /** ID for a new dashboard (required if dashboard not provided) */
-    dashboardId?: string
-    /** Props for a new dashboard (optional only relevant if no existing dashboard is used) */
-    dashboardProps?: DashboardProps
-    /** Default log groups to use for widgets (optional) */
-    defaultLogGroups?: string[] | string
-  }) {
-    super(scope, id)
+  constructor(
+    scope: Construct,
+    id: string,
+    options: {
+      /** Existing dashboard to use (optional) */
+      dashboard?: Dashboard;
+      /** ID for a new dashboard (required if dashboard not provided) */
+      dashboardId?: string;
+      /** Props for a new dashboard (optional only relevant if no existing dashboard is used) */
+      dashboardProps?: DashboardProps;
+      /** Default log groups to use for widgets (optional) */
+      defaultLogGroups?: string[] | string;
+    },
+  ) {
+    super(scope, id);
 
     if (!options.dashboard && !options.dashboardId) {
-      throw new Error('Either a dashboard construct or dashboardId with optional props must be provided')
+      throw new Error(
+        'Either a dashboard construct or dashboardId with optional props must be provided',
+      );
     }
 
     if (options.dashboard && options.dashboardId) {
-      throw new Error('Either a dashboard construct or dashboardId with optional props must be provided, not both')
+      throw new Error(
+        'Either a dashboard construct or dashboardId with optional props must be provided, not both',
+      );
     }
 
     if (options.dashboard && options.dashboardProps) {
-      console.warn('dashboardProps will be ignored as an existing dashboard is being used')
+      console.warn(
+        'dashboardProps will be ignored as an existing dashboard is being used',
+      );
     }
 
-    this.defaultLogGroups = options.defaultLogGroups
+    this.defaultLogGroups = options.defaultLogGroups;
 
-    this.dashboard = options.dashboard
-      ?? new Dashboard(this, options.dashboardId!, options.dashboardProps ?? {})
+    this.dashboard =
+      options.dashboard ??
+      new Dashboard(this, options.dashboardId!, options.dashboardProps ?? {});
   }
 
   /**
@@ -74,14 +90,17 @@ export class JitsiCloudWatchDashboard extends Construct {
    * @param logGroups Log group name(s) to query, if not provided the default log groups will be used
    * @param options Configuration options
    */
-  addWeb(logGroups: string | string[] | undefined = undefined, options: JitsiWidgetOptions = {}): void {
+  addWeb(
+    logGroups: string | string[] | undefined = undefined,
+    options: JitsiWidgetOptions = {},
+  ): void {
     if (!logGroups && this.defaultLogGroups) {
-      logGroups = this.defaultLogGroups
+      logGroups = this.defaultLogGroups;
     }
     if (!logGroups) {
-      throw new Error('Log groups must be provided or set as default')
+      throw new Error('Log groups must be provided or set as default');
     }
-    jitsiWidgetsWeb(this.dashboard, logGroups, options)
+    jitsiWidgetsWeb(this.dashboard, logGroups, options);
   }
 
   /**
@@ -90,14 +109,17 @@ export class JitsiCloudWatchDashboard extends Construct {
    * @param logGroups Log group name(s) to query, if not provided the default log groups will be used
    * @param options Configuration options
    */
-  addJvb(logGroups: string | string[] | undefined = undefined, options: JitsiWidgetOptions = {}): void {
+  addJvb(
+    logGroups: string | string[] | undefined = undefined,
+    options: JitsiWidgetOptions = {},
+  ): void {
     if (!logGroups && this.defaultLogGroups) {
-      logGroups = this.defaultLogGroups
+      logGroups = this.defaultLogGroups;
     }
     if (!logGroups) {
-      throw new Error('Log groups must be provided or set as default')
+      throw new Error('Log groups must be provided or set as default');
     }
-    jitsiWidgetsJvb(this.dashboard, logGroups, options)
+    jitsiWidgetsJvb(this.dashboard, logGroups, options);
   }
 
   /**
@@ -106,14 +128,17 @@ export class JitsiCloudWatchDashboard extends Construct {
    * @param logGroups Log group name(s) to query, if not provided the default log groups will be used
    * @param options Configuration options
    */
-  addJicofo(logGroups: string | string[] | undefined = undefined, options: JitsiWidgetOptions = {}): void {
+  addJicofo(
+    logGroups: string | string[] | undefined = undefined,
+    options: JitsiWidgetOptions = {},
+  ): void {
     if (!logGroups && this.defaultLogGroups) {
-      logGroups = this.defaultLogGroups
+      logGroups = this.defaultLogGroups;
     }
     if (!logGroups) {
-      throw new Error('Log groups must be provided or set as default')
+      throw new Error('Log groups must be provided or set as default');
     }
-    jitsiWidgetsJicofo(this.dashboard, logGroups, options)
+    jitsiWidgetsJicofo(this.dashboard, logGroups, options);
   }
 
   /**
@@ -122,14 +147,17 @@ export class JitsiCloudWatchDashboard extends Construct {
    * @param logGroups Log group name(s) to query, if not provided the default log groups will be used
    * @param options Configuration options
    */
-  addProsody(logGroups: string | string[] | undefined = undefined, options: JitsiWidgetOptions = {}): void {
+  addProsody(
+    logGroups: string | string[] | undefined = undefined,
+    options: JitsiWidgetOptions = {},
+  ): void {
     if (!logGroups && this.defaultLogGroups) {
-      logGroups = this.defaultLogGroups
+      logGroups = this.defaultLogGroups;
     }
     if (!logGroups) {
-      throw new Error('Log groups must be provided or set as default')
+      throw new Error('Log groups must be provided or set as default');
     }
-    jitsiWidgetsProsody(this.dashboard, logGroups, options)
+    jitsiWidgetsProsody(this.dashboard, logGroups, options);
   }
 
   /**
@@ -138,14 +166,17 @@ export class JitsiCloudWatchDashboard extends Construct {
    * @param logGroups Log group name(s) to query, if not provided the default log groups will be used
    * @param options Configuration options
    */
-  addJibri(logGroups: string | string[] | undefined = undefined, options: JitsiWidgetOptions = {}): void {
+  addJibri(
+    logGroups: string | string[] | undefined = undefined,
+    options: JitsiWidgetOptions = {},
+  ): void {
     if (!logGroups && this.defaultLogGroups) {
-      logGroups = this.defaultLogGroups
+      logGroups = this.defaultLogGroups;
     }
     if (!logGroups) {
-      throw new Error('Log groups must be provided or set as default')
+      throw new Error('Log groups must be provided or set as default');
     }
-    jitsiWidgetsJibri(this.dashboard, logGroups, options)
+    jitsiWidgetsJibri(this.dashboard, logGroups, options);
   }
 }
 
@@ -166,10 +197,10 @@ export function jitsiWidgetsWeb(
     width = 8,
     height = 8,
     timeBin = '5m',
-  } = options
+  } = options;
 
-  const logGroupNames = Array.isArray(logGroups) ? logGroups : [logGroups]
-  const streamFilter = `filter @logStream like "${streamPrefix}"`
+  const logGroupNames = Array.isArray(logGroups) ? logGroups : [logGroups];
+  const streamFilter = `filter @logStream like "${streamPrefix}"`;
 
   dashboard.addWidgets(
     new TextWidget({
@@ -218,7 +249,7 @@ export function jitsiWidgetsWeb(
         'stats count(*) as count by status_code',
       ],
     }),
-  )
+  );
 }
 
 /**
@@ -233,14 +264,10 @@ export function jitsiWidgetsJvb(
   logGroups: string | string[],
   options: JitsiWidgetOptions = {},
 ): void {
-  const {
-    streamPrefix = 'jitsi/jvb_',
-    width = 8,
-    height = 8,
-  } = options
+  const { streamPrefix = 'jitsi/jvb_', width = 8, height = 8 } = options;
 
-  const logGroupNames = Array.isArray(logGroups) ? logGroups : [logGroups]
-  const streamFilter = `filter @logStream like "${streamPrefix}"`
+  const logGroupNames = Array.isArray(logGroups) ? logGroups : [logGroups];
+  const streamFilter = `filter @logStream like "${streamPrefix}"`;
 
   dashboard.addWidgets(
     new TextWidget({
@@ -257,12 +284,12 @@ export function jitsiWidgetsJvb(
       height,
       queryLines: [
         streamFilter,
-        'parse @message \'JVB * * * \' as date, time, level, rest',
+        "parse @message 'JVB * * * ' as date, time, level, rest",
         'filter ispresent(level)',
         'stats count(*) as count by level',
       ],
     }),
-  )
+  );
 }
 
 /**
@@ -282,10 +309,10 @@ export function jitsiWidgetsJicofo(
     width = 8,
     height = 8,
     timeBin = '15m',
-  } = options
+  } = options;
 
-  const logGroupNames = Array.isArray(logGroups) ? logGroups : [logGroups]
-  const streamFilter = `filter @logStream like "${streamPrefix}"`
+  const logGroupNames = Array.isArray(logGroups) ? logGroups : [logGroups];
+  const streamFilter = `filter @logStream like "${streamPrefix}"`;
 
   dashboard.addWidgets(
     new TextWidget({
@@ -302,7 +329,7 @@ export function jitsiWidgetsJicofo(
       height,
       queryLines: [
         streamFilter,
-        'parse @message \'Jicofo * * * \' as date, time, level, rest',
+        "parse @message 'Jicofo * * * ' as date, time, level, rest",
         'filter ispresent(level)',
         'stats count(*) as count by level',
       ],
@@ -381,7 +408,7 @@ export function jitsiWidgetsJicofo(
         'sort @timestamp asc',
       ],
     }),
-  )
+  );
 }
 
 /**
@@ -401,10 +428,10 @@ export function jitsiWidgetsProsody(
     width = 8,
     height = 8,
     timeBin = '15m',
-  } = options
+  } = options;
 
-  const logGroupNames = Array.isArray(logGroups) ? logGroups : [logGroups]
-  const streamFilter = `filter @logStream like "${streamPrefix}"`
+  const logGroupNames = Array.isArray(logGroups) ? logGroups : [logGroups];
+  const streamFilter = `filter @logStream like "${streamPrefix}"`;
 
   dashboard.addWidgets(
     new TextWidget({
@@ -442,7 +469,7 @@ export function jitsiWidgetsProsody(
         'sort @timestamp asc',
       ],
     }),
-  )
+  );
 }
 
 /**
@@ -462,10 +489,10 @@ export function jitsiWidgetsJibri(
     width = 8,
     height = 8,
     timeBin = '15m',
-  } = options
+  } = options;
 
-  const logGroupNames = Array.isArray(logGroups) ? logGroups : [logGroups]
-  const streamFilter = `filter @logStream like "${streamPrefix}"`
+  const logGroupNames = Array.isArray(logGroups) ? logGroups : [logGroups];
+  const streamFilter = `filter @logStream like "${streamPrefix}"`;
 
   dashboard.addWidgets(
     new TextWidget({
@@ -482,7 +509,7 @@ export function jitsiWidgetsJibri(
       height,
       queryLines: [
         streamFilter,
-        'parse @message \'Jibri * * * \' as date, time, level, rest',
+        "parse @message 'Jibri * * * ' as date, time, level, rest",
         'filter ispresent(level)',
         'stats count(*) as count by level',
       ],
@@ -518,5 +545,5 @@ export function jitsiWidgetsJibri(
         'sort @timestamp asc',
       ],
     }),
-  )
+  );
 }
